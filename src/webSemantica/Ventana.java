@@ -33,8 +33,6 @@ public class Ventana extends JFrame {
 	private JTextField rango1;
 	private JTextField rango2;
 	private JLabel lblM;
-	private JTextField opciones;
-	private JTextArea resultados;
 	private JPanel panelbusqueda;
 	private JComboBox distritofield;
 	private JLabel guion;
@@ -42,6 +40,9 @@ public class Ventana extends JFrame {
 	private JScrollPane panelresultado;
 	private JButton btnVolver;
 	private JLabel icono;
+	private JTextArea resultados;
+	private JTextArea opciones;
+	private JScrollPane panelopciones;
 
 	/**
 	 * Launch the application.
@@ -72,8 +73,26 @@ public class Ventana extends JFrame {
 		contentPane.setLayout(null);
 		//----------------------------------------------------------------------		
 		panelresultado = new JScrollPane();
-		panelresultado.setBounds(10, 137, 702, 294);
+		panelresultado.setBounds(10, 192, 702, 239);
 		panelresultado.setVisible(false);
+		panelresultado.setBorder(new LineBorder(new Color(0, 139,139), 2, true));
+		resultados = new JTextArea();
+		resultados.setFont(new Font("Monospaced", Font.PLAIN, 15));
+		resultados.setText("Aqui estan los resultados:");
+		panelresultado.setViewportView(resultados);
+		contentPane.add(panelresultado);
+		//----------------------------------------------------------------------
+		panelopciones = new JScrollPane();
+		panelopciones.setBounds(10, 137, 702, 57);
+		contentPane.add(panelopciones);
+		panelopciones.setVisible(false);
+		
+		opciones = new JTextArea();
+		opciones.setFont(new Font("Monospaced", Font.PLAIN, 15));
+		opciones.setText("Los resultados filtrados por :");
+		panelopciones.setViewportView(opciones);
+		panelopciones.setBorder(new LineBorder(new Color(0, 139,139), 2, true));
+		
 		//--------------------------------------------------------------------
 		panelbusqueda = new JPanel();
 		panelbusqueda.setBorder(null);
@@ -149,23 +168,6 @@ public class Ventana extends JFrame {
 		lblM.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblM.setBounds(400, 196, 26, 22);
 		panelbusqueda.add(lblM);
-		panelresultado.setBorder(new LineBorder(new Color(0, 139,139), 2, true));
-		contentPane.add(panelresultado);
-		//----------------------------------------------------------------------
-		opciones = new JTextField();
-		opciones.setBackground(Color.WHITE);
-		opciones.setEditable(false);
-		opciones.setFont(new Font("Tahoma", Font.BOLD, 15));
-		opciones.setText("Resultados filtrados con opciones : ");
-		panelresultado.setColumnHeaderView(opciones);
-		opciones.setColumns(10);
-		opciones.setBorder(new LineBorder(new Color(0, 139,139), 1, true));
-		//----------------------------------------------------------------------
-		resultados = new JTextArea();
-		resultados.setEditable(false);
-		resultados.setText("Aqui estan los resultados.");
-		resultados.setFont(new Font("Monospaced", Font.BOLD, 15));
-		panelresultado.setViewportView(resultados);		
 		//--------------------------------------------------------------------
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(310, 485, 89, 23);
@@ -215,11 +217,10 @@ public class Ventana extends JFrame {
 				panelbusqueda.setVisible(false);
 				btnConsultar.setVisible(false);
 				panelresultado.setVisible(true);
+				panelopciones.setVisible(true);
 				btnVolver.setVisible(true);
 				//-----------------------------
-				if(!numArchivofield.getText().isEmpty()) {
-					 opciones.setText(opciones.getText() + "numero de archivo = " + numArchivofield.getText());
-				}
+				
 				
 			}
 		});
@@ -229,6 +230,7 @@ public class Ventana extends JFrame {
 				panelbusqueda.setVisible(true);
 				btnConsultar.setVisible(true);
 				panelresultado.setVisible(false);
+				panelopciones.setVisible(false);
 				btnVolver.setVisible(false);
 				//------------------------------
 				numArchivofield.setText(null);
