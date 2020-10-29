@@ -184,7 +184,7 @@ public class Ventana extends JFrame {
 		contentPane.add(btnConsultar);
 		//--------------------------------------------------------------------
 		icono = new JLabel("");
-		icono.setIcon(new ImageIcon("C:\\uni\\webSemantica\\icono.jpg"));
+		icono.setIcon(new ImageIcon("C:\\uni\\uniweb\\webSemantica\\icono.jpg"));
 		icono.setBounds(460, 32, 91, 94);
 		contentPane.add(icono);
 		//--------------------------------------------------------------------

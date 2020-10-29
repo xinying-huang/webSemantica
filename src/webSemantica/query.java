@@ -19,8 +19,9 @@ public class query {
 		Model model = ModelFactory.createDefaultModel();
 		model.read("zonasverdes.ttl");
 		//model.write(System.out);
-	    String querystring = "SELECT DISTINCT ?Distrito\r\n" + 
+	    String querystring = "SELECT DISTINCT ?Distrito ?Subepigrafe ?Apartado\r\n" + 
 	    		"WHERE {\r\n" + 
+	    		"	?Distrito a <http://group56.org/zonas-verdes/Distrito>.\r\n" + 
 	    		"	?Distrito a <http://group56.org/zonas-verdes/Distrito>.\r\n" + 
 	    		"}";
 	    Query query = QueryFactory.create(querystring);
