@@ -1,6 +1,7 @@
 package webSemantica;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -20,6 +21,10 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class Ventana extends JFrame {
 
@@ -37,12 +42,18 @@ public class Ventana extends JFrame {
 	private JComboBox distritofield;
 	private JLabel guion;
 	private JButton btnConsultar;
-	private JScrollPane panelresultado;
 	private JButton btnVolver;
 	private JLabel icono;
-	private JTextArea resultados;
 	private JTextArea opciones;
 	private JScrollPane panelopciones;
+	private JLabel atencion;
+	private JLabel label;
+	private JLabel label_1;
+	private JScrollPane panelresultado;
+	private JTextArea resultados;
+	private JPanel panel;
+	private JButton btnCentro;
+	private JButton btnArganzuela;
 
 	/**
 	 * Launch the application.
@@ -71,11 +82,61 @@ public class Ventana extends JFrame {
 		contentPane.setBorder(null);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		//----------------------------------------------------------------------		
+		//----------------------------------------------------------------------
+		panelopciones = new JScrollPane();
+		panelopciones.setBounds(10, 137, 702, 57);
+		contentPane.add(panelopciones);
+		panelopciones.setVisible(false);
+
+		opciones = new JTextArea();
+		opciones.setEditable(false);
+		opciones.setFont(new Font("Monospaced", Font.PLAIN, 15));
+		opciones.setText("Los resultados filtrados por :");
+		panelopciones.setViewportView(opciones);
+		panelopciones.setBorder(new LineBorder(new Color(0, 139,139), 2, true));
+		
 		panelresultado = new JScrollPane();
-		panelresultado.setBounds(10, 192, 702, 239);
+		panelresultado.setBounds(10, 231, 702, 242);
+		contentPane.add(panelresultado);
+		panelresultado.setBorder(new LineBorder(new Color(0, 139,139), 2, true));
+		
+		resultados = new JTextArea();
+		panelresultado.setViewportView(resultados);
 		panelresultado.setVisible(false);
 		
+		panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(10, 195, 702, 38);
+		contentPane.add(panel);
+		panel.setBorder(new LineBorder(new Color(0, 139,139), 2, true));
+		
+		btnCentro = new JButton("Centro");
+		btnCentro.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				openWebPage("https://www.wikidata.org/wiki/Q1763376");
+			}
+		});
+		btnCentro.setBounds(10, 7, 74, 23);
+		btnCentro.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		btnArganzuela = new JButton("Arganzuela");
+		btnArganzuela.setBounds(110, 7, 106, 23);
+		btnArganzuela.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel.setLayout(null);
+		panel.add(btnCentro);
+		panel.add(btnArganzuela);
+		panel.setVisible(false);
+		
+//		JButton btnHaha = new JButton("haha");
+//		btnHaha.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				openWebPage("https://www.wikidata.org/wiki/Q1763376");
+//			}
+//		});
+//		btnHaha.setBounds(40, 45, 98, 46);
+//		panelresultado.add(btnHaha);
+
 		//--------------------------------------------------------------------
 		panelbusqueda = new JPanel();
 		panelbusqueda.setBorder(null);
@@ -101,7 +162,7 @@ public class Ventana extends JFrame {
 		txtDistrito.setEditable(false);
 		txtDistrito.setHorizontalAlignment(SwingConstants.LEFT);
 		txtDistrito.setText("Distrito : ");
-		txtDistrito.setBounds(28, 207, 74, 41);
+		txtDistrito.setBounds(28, 191, 74, 41);
 		txtDistrito.setBorder(null);
 		panelbusqueda.add(txtDistrito);
 		txtDistrito.setColumns(10);
@@ -112,7 +173,7 @@ public class Ventana extends JFrame {
 		txtTamaoSolar.setEditable(false);
 		txtTamaoSolar.setHorizontalAlignment(SwingConstants.LEFT);
 		txtTamaoSolar.setText("Tama\u00F1o Solar : ");
-		txtTamaoSolar.setBounds(28, 267, 134, 42);
+		txtTamaoSolar.setBounds(28, 243, 134, 42);
 		txtTamaoSolar.setBorder(null);
 		panelbusqueda.add(txtTamaoSolar);
 		txtTamaoSolar.setColumns(10);
@@ -120,8 +181,8 @@ public class Ventana extends JFrame {
 		distritofield = new JComboBox();
 		distritofield.setForeground(Color.WHITE);
 		distritofield.setBackground(new Color(0, 139,139));
-		distritofield.setBounds(112, 218, 98, 22);
-		distritofield.setModel(new DefaultComboBoxModel(new String[] {"Centro", "Arganzuela"}));
+		distritofield.setBounds(112, 202, 98, 22);
+		distritofield.setModel(new DefaultComboBoxModel(new String[] {" ", "Centro", "Arganzuela"}));
 		panelbusqueda.add(distritofield);
 		//--------------------------------------------------------------------
 		numArchivofield = new JTextField();
@@ -131,55 +192,53 @@ public class Ventana extends JFrame {
 		numArchivofield.setBorder(new LineBorder(new Color(0, 139,139), 2, true));
 		//--------------------------------------------------------------------
 		rango1 = new JTextField();
-		rango1.setBounds(167, 279, 96, 20);
+		rango1.setBounds(164, 255, 96, 20);
 		panelbusqueda.add(rango1);
 		rango1.setColumns(10);
 		rango1.setBorder(new LineBorder(new Color(0, 139,139), 2, true));
 		//--------------------------------------------------------------------
 		rango2 = new JTextField();
-		rango2.setBounds(290, 279, 96, 20);
+		rango2.setBounds(287, 255, 96, 20);
 		panelbusqueda.add(rango2);
 		rango2.setColumns(10);
 		rango2.setBorder(new LineBorder(new Color(0, 139,139), 2, true));
 		//--------------------------------------------------------------------
 		guion = new JLabel("-");
 		guion.setFont(new Font("Tahoma", Font.BOLD, 15));
-		guion.setBounds(273, 276, 7, 22);
+		guion.setBounds(270, 252, 7, 22);
 		panelbusqueda.add(guion);
 		//--------------------------------------------------------------------
 		lblM = new JLabel("m2");
 		lblM.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblM.setBounds(396, 276, 26, 22);
+		lblM.setBounds(393, 255, 26, 22);
 		panelbusqueda.add(lblM);
 		
-		JLabel lblNewLabel = new JLabel("Puedes utilizar las siguientes opciones para filtrar las zonas verdes.");
-		lblNewLabel.setForeground(new Color(51, 153, 153));
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		lblNewLabel.setBounds(28, 169, 568, 27);
-		panelbusqueda.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Puedes buscar una zona verde por su n\u00FAmero de archivo.");
-		lblNewLabel_1.setForeground(new Color(51, 153, 153));
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		lblNewLabel_1.setBounds(28, 38, 483, 27);
-		panelbusqueda.add(lblNewLabel_1);
-		panelresultado.setBorder(new LineBorder(new Color(0, 139,139), 2, true));
-		resultados = new JTextArea();
-		resultados.setFont(new Font("Monospaced", Font.PLAIN, 15));
-		resultados.setText("Aqui estan los resultados:");
-		panelresultado.setViewportView(resultados);
-		contentPane.add(panelresultado);
-		//----------------------------------------------------------------------
-		panelopciones = new JScrollPane();
-		panelopciones.setBounds(10, 137, 702, 57);
-		contentPane.add(panelopciones);
-		panelopciones.setVisible(false);
-		
-		opciones = new JTextArea();
-		opciones.setFont(new Font("Monospaced", Font.PLAIN, 15));
-		opciones.setText("Los resultados filtrados por :");
-		panelopciones.setViewportView(opciones);
-		panelopciones.setBorder(new LineBorder(new Color(0, 139,139), 2, true));
+				JLabel lblNewLabel = new JLabel("Puedes utilizar las siguientes opciones para filtrar las zonas verdes.");
+				lblNewLabel.setForeground(new Color(51, 153, 153));
+				lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+				lblNewLabel.setBounds(28, 153, 532, 27);
+				panelbusqueda.add(lblNewLabel);
+				
+						JLabel lblNewLabel_1 = new JLabel("Puedes buscar una zona verde por su n\u00FAmero de archivo.");
+						lblNewLabel_1.setForeground(new Color(51, 153, 153));
+						lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+						lblNewLabel_1.setBounds(28, 38, 451, 27);
+						panelbusqueda.add(lblNewLabel_1);
+						
+								atencion = new JLabel(" ");
+								atencion.setForeground(new Color(255, 51, 51));
+								atencion.setBounds(28, 294, 664, 27);
+								panelbusqueda.add(atencion);
+								
+										label = new JLabel("");
+										label.setForeground(new Color(255, 51, 51));
+										label.setBounds(0, 38, 29, 27);
+										panelbusqueda.add(label);
+										
+												label_1 = new JLabel("");
+												label_1.setForeground(new Color(255, 51, 51));
+												label_1.setBounds(0, 153, 29, 27);
+												panelbusqueda.add(label_1);
 		//--------------------------------------------------------------------
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(310, 485, 89, 23);
@@ -188,6 +247,22 @@ public class Ventana extends JFrame {
 		btnVolver.setBackground(new Color(0, 139, 139));
 		btnVolver.setBounds(10, 485, 696, 23);
 		btnVolver.setVisible(false);
+		btnVolver.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				panelbusqueda.setVisible(true);
+				btnConsultar.setVisible(true);
+				panelresultado.setVisible(false);
+				panelopciones.setVisible(false);
+				btnVolver.setVisible(false);
+				panel.setVisible(false);
+				atencion.setText("");
+				//------------------------------
+				numArchivofield.setText(null);
+				rango1.setText(null);
+				rango2.setText(null);
+			}
+		});
 		//--------------------------------------------------------------------
 		btnConsultar = new JButton("Consultar");		
 		btnConsultar.setForeground(Color.WHITE);
@@ -226,29 +301,38 @@ public class Ventana extends JFrame {
 		btnConsultar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				panelbusqueda.setVisible(false);
-				btnConsultar.setVisible(false);
-				panelresultado.setVisible(true);
-				panelopciones.setVisible(true);
-				btnVolver.setVisible(true);
 				//-----------------------------
-				
-				
+				//si introduce numero archivo -> los otros campos no deben ser introducidos
+				String distrito = (String)distritofield.getSelectedItem();
+				if(!numArchivofield.getText().isEmpty() && (!rango1.getText().isEmpty() || !rango2.getText().isEmpty() || !distrito.equals(" "))) {
+					label.setText("1");
+					label_1.setText("2");
+					atencion.setText("Los campos del 1 y del 2 no se puede combinar");
+				}
+				else if(numArchivofield.getText().isEmpty() && rango1.getText().isEmpty() && rango2.getText().isEmpty() && distrito.equals(" ")) {
+					atencion.setText("Por favor, rellenar un campo !");
+				}
+				else {					
+					
+					//-----------------------------
+					panelbusqueda.setVisible(false);
+					btnConsultar.setVisible(false);
+					panelresultado.setVisible(true);
+					panelopciones.setVisible(true);
+					btnVolver.setVisible(true);
+					panel.setVisible(true);
+					//-----------------------------
+
+				}								
 			}
 		});
-		btnVolver.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				panelbusqueda.setVisible(true);
-				btnConsultar.setVisible(true);
-				panelresultado.setVisible(false);
-				panelopciones.setVisible(false);
-				btnVolver.setVisible(false);
-				//------------------------------
-				numArchivofield.setText(null);
-				rango1.setText(null);
-				rango2.setText(null);
-			}
-		});
+	}
+	public void openWebPage(String url){
+		try {
+			java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+		}
+		catch (java.io.IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }
