@@ -112,10 +112,10 @@ public class Queries {
 				Literal name2;
 				if(narchivo == -1) {
 					name2 = soln.getLiteral("N");
-					res += "NÃºmero de archivo: " + name2 + "\n";
+					res += "Número de archivo: " + name2 + "\n";
 				}
 				else {
-					res += "NÃºmero de archivo: " + narchivo + "\n";
+					res += "Número de archivo: " + narchivo + "\n";
 				}
 				if(distrito == null) {
 					name2 = soln.getLiteral("D");
@@ -133,7 +133,7 @@ public class Queries {
 					res += "Distrito: " + distrito + "\n";
 				}
 				name2 = soln.getLiteral("S");
-				res += "SubepÃ­grafe: " + name2 + "\n";
+				res += "Subepígrafe: " + name2 + "\n";
 				name2 = soln.getLiteral("Apartado");
 				res += "Apartado: " + name2 + "\n";
 				name2 = soln.getLiteral("Naturaleza");
@@ -143,7 +143,7 @@ public class Queries {
 				name2 = soln.getLiteral("Destino");
 				res += "Destino: " + name2 + "\n";
 				name2 = soln.getLiteral("Solar");
-				res += "TamaÃ±o solar: " + name2.getDouble() + " m2" + "\n";
+				res += "Tamaño solar: " + name2.getDouble() + " m2" + "\n";
 
 				res += "------------------------------------------------\n";
 			}

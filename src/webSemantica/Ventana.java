@@ -50,10 +50,10 @@ public class Ventana extends JFrame {
 	private JLabel label;
 	private JLabel label_1;
 	private JScrollPane panelresultado;
-	private JTextArea resultados;
 	private JPanel panel;
 	private JButton btnCentro;
 	private JButton btnArganzuela;
+	private JTextArea resultados;
 
 	/**
 	 * Launch the application.
@@ -75,6 +75,10 @@ public class Ventana extends JFrame {
 	 * Create the frame.
 	 */
 	public Ventana() {
+
+		Queries q = new Queries();
+
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 736, 571);
 		contentPane = new JPanel();
@@ -94,23 +98,26 @@ public class Ventana extends JFrame {
 		opciones.setText("Los resultados filtrados por :");
 		panelopciones.setViewportView(opciones);
 		panelopciones.setBorder(new LineBorder(new Color(0, 139,139), 2, true));
-		
+
 		panelresultado = new JScrollPane();
 		panelresultado.setBounds(10, 231, 702, 242);
 		contentPane.add(panelresultado);
 		panelresultado.setBorder(new LineBorder(new Color(0, 139,139), 2, true));
-		
+
 		resultados = new JTextArea();
+		resultados.setText("nihao");
 		panelresultado.setViewportView(resultados);
 		panelresultado.setVisible(false);
-		
+
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(10, 195, 702, 38);
 		contentPane.add(panel);
 		panel.setBorder(new LineBorder(new Color(0, 139,139), 2, true));
-		
+
 		btnCentro = new JButton("Centro");
+		btnCentro.setForeground(Color.WHITE);
+		btnCentro.setBackground(new Color(0, 139, 139));
 		btnCentro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -119,24 +126,24 @@ public class Ventana extends JFrame {
 		});
 		btnCentro.setBounds(10, 7, 74, 23);
 		btnCentro.setHorizontalAlignment(SwingConstants.LEFT);
-		
+		btnCentro.setVisible(false);
+
 		btnArganzuela = new JButton("Arganzuela");
-		btnArganzuela.setBounds(110, 7, 106, 23);
+		btnArganzuela.setForeground(Color.WHITE);
+		btnArganzuela.setBackground(new Color(0, 139, 139));
+		btnArganzuela.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				openWebPage("https://www.wikidata.org/wiki/Q2000929");
+			}
+		});
+		btnArganzuela.setBounds(586, 7, 106, 23);
 		btnArganzuela.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnArganzuela.setVisible(false);
 		panel.setLayout(null);
 		panel.add(btnCentro);
 		panel.add(btnArganzuela);
 		panel.setVisible(false);
-		
-//		JButton btnHaha = new JButton("haha");
-//		btnHaha.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				openWebPage("https://www.wikidata.org/wiki/Q1763376");
-//			}
-//		});
-//		btnHaha.setBounds(40, 45, 98, 46);
-//		panelresultado.add(btnHaha);
-
 		//--------------------------------------------------------------------
 		panelbusqueda = new JPanel();
 		panelbusqueda.setBorder(null);
@@ -212,33 +219,33 @@ public class Ventana extends JFrame {
 		lblM.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblM.setBounds(393, 255, 26, 22);
 		panelbusqueda.add(lblM);
-		
-				JLabel lblNewLabel = new JLabel("Puedes utilizar las siguientes opciones para filtrar las zonas verdes.");
-				lblNewLabel.setForeground(new Color(51, 153, 153));
-				lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-				lblNewLabel.setBounds(28, 153, 532, 27);
-				panelbusqueda.add(lblNewLabel);
-				
-						JLabel lblNewLabel_1 = new JLabel("Puedes buscar una zona verde por su n\u00FAmero de archivo.");
-						lblNewLabel_1.setForeground(new Color(51, 153, 153));
-						lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-						lblNewLabel_1.setBounds(28, 38, 451, 27);
-						panelbusqueda.add(lblNewLabel_1);
-						
-								atencion = new JLabel(" ");
-								atencion.setForeground(new Color(255, 51, 51));
-								atencion.setBounds(28, 294, 664, 27);
-								panelbusqueda.add(atencion);
-								
-										label = new JLabel("");
-										label.setForeground(new Color(255, 51, 51));
-										label.setBounds(0, 38, 29, 27);
-										panelbusqueda.add(label);
-										
-												label_1 = new JLabel("");
-												label_1.setForeground(new Color(255, 51, 51));
-												label_1.setBounds(0, 153, 29, 27);
-												panelbusqueda.add(label_1);
+
+		JLabel lblNewLabel = new JLabel("Puedes utilizar las siguientes opciones para filtrar las zonas verdes.");
+		lblNewLabel.setForeground(new Color(51, 153, 153));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+		lblNewLabel.setBounds(28, 153, 532, 27);
+		panelbusqueda.add(lblNewLabel);
+
+		JLabel lblNewLabel_1 = new JLabel("Puedes buscar una zona verde por su n\u00FAmero de archivo.");
+		lblNewLabel_1.setForeground(new Color(51, 153, 153));
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+		lblNewLabel_1.setBounds(28, 38, 451, 27);
+		panelbusqueda.add(lblNewLabel_1);
+
+		atencion = new JLabel(" ");
+		atencion.setForeground(new Color(255, 51, 51));
+		atencion.setBounds(28, 294, 664, 27);
+		panelbusqueda.add(atencion);
+
+		label = new JLabel("");
+		label.setForeground(new Color(255, 51, 51));
+		label.setBounds(0, 38, 29, 27);
+		panelbusqueda.add(label);
+
+		label_1 = new JLabel("");
+		label_1.setForeground(new Color(255, 51, 51));
+		label_1.setBounds(0, 153, 29, 27);
+		panelbusqueda.add(label_1);
 		//--------------------------------------------------------------------
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(310, 485, 89, 23);
@@ -257,10 +264,13 @@ public class Ventana extends JFrame {
 				btnVolver.setVisible(false);
 				panel.setVisible(false);
 				atencion.setText("");
+				opciones.setText("Los resultados filtrados por :");
 				//------------------------------
 				numArchivofield.setText(null);
 				rango1.setText(null);
 				rango2.setText(null);
+				btnCentro.setVisible(false);
+				btnArganzuela.setVisible(false);
 			}
 		});
 		//--------------------------------------------------------------------
@@ -309,11 +319,143 @@ public class Ventana extends JFrame {
 					label_1.setText("2");
 					atencion.setText("Los campos del 1 y del 2 no se puede combinar");
 				}
+				//todos campos vacios
 				else if(numArchivofield.getText().isEmpty() && rango1.getText().isEmpty() && rango2.getText().isEmpty() && distrito.equals(" ")) {
 					atencion.setText("Por favor, rellenar un campo !");
 				}
-				else {					
-					
+				else {	
+					String res = "Lo sentimos, no hemos encontrado ningún resultado para tu búsqueda.";
+					//numero de archivo rellenado
+					if(!numArchivofield.getText().isEmpty()) {
+						int narchivo = Integer.parseInt(numArchivofield.getText());
+						opciones.setText(opciones.getText() + " numero de archivo = " + narchivo);
+						ResAndDis rd = Queries.queryNarchivo(narchivo);
+						if(!rd.resultado.isEmpty()) {
+							if(rd.Arganzuela) {
+								btnArganzuela.setVisible(true);
+							}
+							else {
+								btnCentro.setVisible(true);
+							}
+							res=rd.resultado;
+						}
+					}
+					else if(!distrito.equals(" ")) {						
+						//los tres campos rellenados
+						if(!rango1.getText().isEmpty() && !rango2.getText().isEmpty()) {
+							int r1= Integer.parseInt(rango1.getText());
+							int r2= Integer.parseInt(rango2.getText());
+							opciones.setText(opciones.getText() + " distrito = " + distrito + ", el rango del tamaño solar = " + r1 + "~" + r2);
+							ResAndDis rd = Queries.queryDS(distrito, r1, r2);
+							if(!rd.resultado.isEmpty()) {
+								if(rd.Arganzuela) {
+									btnArganzuela.setVisible(true);
+								}
+								else {
+									btnCentro.setVisible(true);
+								}
+								res=rd.resultado;
+							}
+						}
+						//rango1 rellenado
+						else if(!rango1.getText().isEmpty()) {
+							int r1= Integer.parseInt(rango1.getText());
+							int r2= -1;
+							opciones.setText(opciones.getText() + " distrito = " + distrito + ", el rango del tamaño solar = " + r1 + "~" + r2);
+							ResAndDis rd = Queries.queryDS(distrito, r1, r2);
+							if(!rd.resultado.isEmpty()) {
+								if(rd.Arganzuela) {
+									btnArganzuela.setVisible(true);
+								}
+								else {
+									btnCentro.setVisible(true);
+								}
+								res=rd.resultado;
+							}
+						}
+						//rango2 rellenado
+						else if(!rango2.getText().isEmpty()) {
+							int r1=-1;
+							int r2= Integer.parseInt(rango2.getText());
+							opciones.setText(opciones.getText() + " distrito = " + distrito + ", el rango del tamaño solar = " + r1 + "~" + r2);
+							ResAndDis rd = Queries.queryDS(distrito, r1, r2);
+							if(!rd.resultado.isEmpty()) {
+								if(rd.Arganzuela) {
+									btnArganzuela.setVisible(true);
+								}
+								else {
+									btnCentro.setVisible(true);
+								}
+								res=rd.resultado;
+							}
+						}
+						//solo distrito rellenado
+						else {
+							opciones.setText(opciones.getText() + " distrito = " + distrito);
+							ResAndDis rd = Queries.queryDistrito(distrito);
+							if(!rd.resultado.isEmpty()) {
+								if(rd.Arganzuela) {
+									btnArganzuela.setVisible(true);
+								}
+								else {
+									btnCentro.setVisible(true);
+								}
+								res=rd.resultado;
+							}
+						}				
+					}
+					else {
+						//los dos campos rellenados
+						if(!rango1.getText().isEmpty() && !rango2.getText().isEmpty()) {
+							int r1= Integer.parseInt(rango1.getText());
+							int r2= Integer.parseInt(rango2.getText());
+							opciones.setText(opciones.getText() + " el rango del tamaño solar = " + r1 + "~" + r2);
+							ResAndDis rd = Queries.querySolar(r1, r2);
+							if(!rd.resultado.isEmpty()) {
+								if(rd.Arganzuela) {
+									btnArganzuela.setVisible(true);
+								}
+								if(rd.Centro) {
+									btnCentro.setVisible(true);
+								}
+								res=rd.resultado;
+							}
+						}
+						//rango1 rellenado
+						else if(!rango1.getText().isEmpty()) {
+							int r1= Integer.parseInt(rango1.getText());
+							int r2= -1;
+							opciones.setText(opciones.getText() + " el rango del tamaño solar = " + r1 + "~" + r2);
+							ResAndDis rd = Queries.querySolar(r1, r2);
+							if(!rd.resultado.isEmpty()) {
+								if(rd.Arganzuela) {
+									btnArganzuela.setVisible(true);
+								}
+								if(rd.Centro) {
+									btnCentro.setVisible(true);
+								}
+								res=rd.resultado;
+							}
+						}
+						//rango2 rellenado
+						else {
+							int r1=-1;
+							int r2= Integer.parseInt(rango2.getText());
+							opciones.setText(opciones.getText() + " el rango del tamaño solar = " + r1 + "~" + r2);
+							ResAndDis rd = Queries.querySolar(r1, r2);
+							if(!rd.resultado.isEmpty()) {
+								if(rd.Arganzuela) {
+									btnArganzuela.setVisible(true);
+								}
+								if(rd.Centro) {
+									btnCentro.setVisible(true);
+								}
+								res=rd.resultado;
+							}
+						}
+					}
+
+					resultados.setText(res);
 					//-----------------------------
 					panelbusqueda.setVisible(false);
 					btnConsultar.setVisible(false);
